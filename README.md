@@ -216,7 +216,3 @@ This image about cat with probability of 0.9821
 
 - Class ordering is determined by folder listing order. Keep train/test class folder names consistent.
 - For reproducibility and more stable label mapping, sorting class names in the dataset loader is a good next improvement.
-
-## License
-
-Add your preferred license file (for example, MIT) if you plan to share this project publicly.
