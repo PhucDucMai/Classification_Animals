@@ -55,6 +55,12 @@ Install dependencies:
 pip install torch torchvision numpy opencv-python scikit-learn matplotlib tqdm tensorboard
 ```
 
+Or install from the dependency file:
+
+```bash
+pip install -r requirements.txt
+```
+
 ## Quick Start
 
 ### 1. Move to the working directory
@@ -113,11 +119,13 @@ After/during training, the script creates:
 
 - `trained_models/last.pt`: checkpoint from the latest epoch
 - `trained_models/best.pt`: best checkpoint by validation accuracy
+- `trained_models/metrics_summary.json`: final summary (best epoch, best val accuracy, last-epoch metrics, metric history)
 - `tensorboard/`: TensorBoard logs (loss, accuracy, confusion matrix)
 
 Note:
 
 - `tensorboard/` is deleted and recreated each training run.
+- Training logs print the selected device (`Using GPU: ...` or CPU fallback).
 
 ## Monitor Training with TensorBoard
 
@@ -216,3 +224,19 @@ This image about cat with probability of 0.9821
 
 - Class ordering is determined by folder listing order. Keep train/test class folder names consistent.
 - For reproducibility and more stable label mapping, sorting class names in the dataset loader is a good next improvement.
+
+## Docker
+
+You can run the full pipeline with Docker (training, test, TensorBoard).
+
+- Quick guide: `README_DOCKER.md`
+- Key files: `Dockerfile`, `docker-compose.yml`, `.dockerignore`, `requirements.txt`
+
+Quick start:
+
+```bash
+docker compose build
+docker compose run --rm train
+docker compose run --rm test
+docker compose up tensorboard
+```

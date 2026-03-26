@@ -1,0 +1,41 @@
+services:
+  train:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: animal-classifier-train
+    working_dir: /app/DL_CV/data
+    command: python train.py
+    shm_size: "4gb"
+    gpus: all
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - ./DL_CV/data:/app/DL_CV/data
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: animal-classifier-test
+    working_dir: /app/DL_CV/data
+    command: python test.py
+    shm_size: "4gb"
+    gpus: all
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - ./DL_CV/data:/app/DL_CV/data
+
+  tensorboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: animal-classifier-tensorboard
+    working_dir: /app/DL_CV/data
+    command: tensorboard --logdir tensorboard --host 0.0.0.0 --port 6006
+    shm_size: "4gb"
+    ports:
+      - "6006:6006"
+    volumes:
+      - ./DL_CV/data:/app/DL_CV/data

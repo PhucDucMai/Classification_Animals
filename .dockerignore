@@ -1,0 +1,12 @@
+.git
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.swo
+*.DS_Store
+
+# Keep model artifacts and logs out of docker build context
+DL_CV/data/trained_models/*
+DL_CV/data/tensorboard/*
